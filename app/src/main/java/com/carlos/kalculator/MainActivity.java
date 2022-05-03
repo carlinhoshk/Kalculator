@@ -1,3 +1,6 @@
+// Carlos Oliveira 16:45 - 03/05/2022
+// Criar uma Calculadora APP
+
 package com.carlos.kalculator;
 
 import androidx.appcompat.app.AppCompatActivity;
