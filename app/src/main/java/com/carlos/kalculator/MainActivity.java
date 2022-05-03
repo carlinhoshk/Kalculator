@@ -7,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button numeroZero, numeroUm, numeroDois, numeroTres, numeroQuatro, numeroCinco, numeroSeis, numeroSete, numeroOito,
@@ -64,6 +67,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textResultado.setText("");
             }
         });
+
+        igual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+
+                    Expression expressao = new ExpressionBuilder(textExpressao.getText().toString()).build();
+                    double resultado = expressao.evaluate();
+                    long longResult = (long) resultado;
+
+                    if (resultado==(double)longResult){
+                        textResultado.setText((CharSequence) String.valueOf(longResult));
+                    }else{
+                        textResultado.setText((CharSequence) String.valueOf(resultado));
+                    }
+                }catch (Exception e){
+
+                }
+
+            }
+        });
     }
 
     private void IniciarComponentes(){
@@ -78,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         numeroOito = findViewById(R.id.numero_oito);
         numeroNove = findViewById(R.id.numero_nove);
         ponto = findViewById(R.id.ponto);
+        soma = findViewById(R.id.soma);
         subtracao = findViewById(R.id.subtracao);
         multiplicacao = findViewById(R.id.multiplicacao);
         divisao = findViewById(R.id.divisao);
@@ -91,16 +116,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void AcrescentarUmaExpressao(String string,boolean limpar_dados){
 
         if (textResultado.getText().equals("")){
-            textExpressao.setText("");
+            textExpressao.setText(" ");
         }
 
         if (limpar_dados){
-            textResultado.setText("");
+            textResultado.setText(" ");
             textExpressao.append(string);
         }else{
             textExpressao.append(textResultado.getText());
             textExpressao.append(string);
-            textResultado.setText("");
+            textResultado.setText(" ");
         }
 
     }
